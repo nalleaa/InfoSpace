@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Background & Card -->
+    <color name="bg_main">#F1F5F9</color>
+    <color name="white">#FFFFFF</color>
+
+    <!-- Primary & Gradient Accent Colors -->
+    <color name="primary_indigo">#4F46E5</color>
+    <color name="primary_indigo_dark">#3730A3</color>
+    <color name="primary_purple">#7C3AED</color>
+    <color name="accent_blue">#0284C7</color>
+    <color name="accent_pink">#EC4899</color>
+    <color name="accent_emerald">#10B981</color>
+    <color name="accent_amber">#F59E0B</color>
+
+    <!-- Soft Colorful Backgrounds -->
+    <color name="indigo_50">#EEF2FF</color>
+    <color name="purple_50">#F5F3FF</color>
+    <color name="blue_50">#F0F9FF</color>
+    <color name="emerald_50">#ECFDF5</color>
+    <color name="amber_50">#FFFBEB</color>
+    <color name="rose_50">#FFF1F2</color>
+
+    <!-- Typography Colors -->
+    <color name="text_primary">#0F172A</color>
+    <color name="text_secondary">#475569</color>
+    <color name="text_muted">#64748B</color>
+
+    <!-- Status & Indicator Colors -->
+    <color name="tag_mpu">#E0E7FF</color>
+    <color name="text_mpu">#3730A3</color>
+    <color name="tag_kk">#DCFCE7</color>
+    <color name="text_kk">#166534</color>
+    <color name="danger_red">#EF4444</color>
+    <color name="border_light">#CBD5E1</color>
+</resources>
