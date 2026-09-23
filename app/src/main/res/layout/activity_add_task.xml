@@ -136,47 +136,6 @@
                     android:textColorHint="@color/text_muted"
                     android:textSize="14sp" />
 
-                <!-- Pilihan Tingkat Kesulitan -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:text="Tingkat Kesulitan"
-                    android:textColor="@color/text_primary"
-                    android:textSize="14sp"
-                    android:textStyle="bold" />
-
-                <RadioGroup
-                    android:id="@+id/rgDifficulty"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:orientation="horizontal">
-
-                    <RadioButton
-                        android:id="@+id/rbMudah"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="12dp"
-                        android:text="Mudah"
-                        android:textColor="@color/text_primary" />
-
-                    <RadioButton
-                        android:id="@+id/rbSedang"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="12dp"
-                        android:text="Sedang"
-                        android:textColor="@color/text_primary" />
-
-                    <RadioButton
-                        android:id="@+id/rbSulit"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Sulit"
-                        android:textColor="@color/text_primary" />
-                </RadioGroup>
-
                 <!-- Tombol Simpan -->
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btnSaveTask"

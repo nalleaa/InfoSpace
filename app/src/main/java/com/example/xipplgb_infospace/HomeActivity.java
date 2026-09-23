@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,14 +21,14 @@ public class HomeActivity extends AppCompatActivity {
     private TextView tvBadgeBlock;
     private TextView tvBlockDateRange;
 
-    private Button btnMenuSchedule;
-    private Button btnMenuCalendar;
-    private Button btnMenuTask;
-    private Button btnMenuInfo;
-    private Button btnMenuChecklist;
-    private Button btnMenuMembers;
-    private Button btnMenuProfile;
-    private Button btnLogoutHome;
+    private View btnMenuSchedule;
+    private View btnMenuCalendar;
+    private View btnMenuTask;
+    private View btnMenuInfo;
+    private View btnMenuChecklist;
+    private View btnMenuMembers;
+    private View btnMenuProfile;
+    private View btnLogoutHome;
 
     private SharedPrefHelper prefHelper;
 
@@ -56,7 +55,7 @@ public class HomeActivity extends AppCompatActivity {
         btnMenuProfile = findViewById(R.id.btnMenuProfile);
         btnLogoutHome = findViewById(R.id.btnLogoutHome);
 
-        // 2. Tampilkan Nama & Kelas dengan jelas (Font Besar & Tegas)
+        // 2. Tampilkan Nama & Kelas dengan jelas
         String nama = prefHelper.getStudentName();
         int absen = prefHelper.getStudentAbsent();
 
@@ -82,7 +81,7 @@ public class HomeActivity extends AppCompatActivity {
             });
         }
 
-        // 5. Tombol Menu Jadwal
+        // 5. Tombol Menu Kartu Jadwal
         if (btnMenuSchedule != null) {
             btnMenuSchedule.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -92,7 +91,7 @@ public class HomeActivity extends AppCompatActivity {
             });
         }
 
-        // 6. Tombol Menu Jadwal Blok (Dedicated Button)
+        // 6. Tombol Menu Kartu Kalender Blok
         if (btnMenuCalendar != null) {
             btnMenuCalendar.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -102,7 +101,7 @@ public class HomeActivity extends AppCompatActivity {
             });
         }
 
-        // 7. Tombol Menu Tugas
+        // 7. Tombol Menu Kartu Tugas
         if (btnMenuTask != null) {
             btnMenuTask.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -112,7 +111,7 @@ public class HomeActivity extends AppCompatActivity {
             });
         }
 
-        // 8. Tombol Menu Info
+        // 8. Tombol Menu Kartu Info
         if (btnMenuInfo != null) {
             btnMenuInfo.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -122,7 +121,7 @@ public class HomeActivity extends AppCompatActivity {
             });
         }
 
-        // 9. Tombol Menu Checklist
+        // 9. Tombol Menu Kartu Checklist
         if (btnMenuChecklist != null) {
             btnMenuChecklist.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -132,7 +131,7 @@ public class HomeActivity extends AppCompatActivity {
             });
         }
 
-        // 10. Tombol Menu Anggota
+        // 10. Tombol Menu Kartu Anggota
         if (btnMenuMembers != null) {
             btnMenuMembers.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -142,7 +141,7 @@ public class HomeActivity extends AppCompatActivity {
             });
         }
 
-        // 11. Tombol Menu Profil
+        // 11. Tombol Menu Kartu Profil
         if (btnMenuProfile != null) {
             btnMenuProfile.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -152,7 +151,7 @@ public class HomeActivity extends AppCompatActivity {
             });
         }
 
-        // 12. Tombol Keluar (Logout)
+        // 12. Tombol Kartu Keluar (Logout)
         if (btnLogoutHome != null) {
             btnLogoutHome.setOnClickListener(new View.OnClickListener() {
                 @Override

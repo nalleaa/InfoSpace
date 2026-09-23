@@ -6,8 +6,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,7 +20,6 @@ public class AddTaskActivity extends AppCompatActivity {
 
     private TextView btnBackAddTask;
     private EditText etTaskTitle, etTaskSubject, etTaskDeadline;
-    private RadioGroup rgDifficulty;
     private Button btnSaveTask;
     private SharedPrefHelper prefHelper;
 
@@ -37,7 +34,6 @@ public class AddTaskActivity extends AppCompatActivity {
         etTaskTitle = findViewById(R.id.etTaskTitle);
         etTaskSubject = findViewById(R.id.etTaskSubject);
         etTaskDeadline = findViewById(R.id.etTaskDeadline);
-        rgDifficulty = findViewById(R.id.rgDifficulty);
         btnSaveTask = findViewById(R.id.btnSaveTask);
 
         if (btnBackAddTask != null) {
@@ -81,28 +77,18 @@ public class AddTaskActivity extends AppCompatActivity {
             return;
         }
 
-        // 2. Validasi RadioButton Kesulitan
-        int selectedRadioId = rgDifficulty.getCheckedRadioButtonId();
-        if (selectedRadioId == -1) {
-            Toast.makeText(this, "Silakan pilih tingkat kesulitan tugas.", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        RadioButton rbSelected = findViewById(selectedRadioId);
-        String difficulty = rbSelected.getText().toString();
-
-        // 3. Ambil Nama Pembuat & Absen dari Sesi Login
+        // 2. Ambil Nama Pembuat & Absen dari Sesi Login
         String authorName = prefHelper.getStudentName();
         int authorAbsent = prefHelper.getStudentAbsent();
 
-        // 4. Tanggal Pembuatan
+        // 3. Tanggal Pembuatan
         SimpleDateFormat sdf = new SimpleDateFormat("d MMMM yyyy", new Locale("in", "ID"));
         String createdAt = sdf.format(new Date());
 
         String taskId = String.valueOf(System.currentTimeMillis());
 
-        // 5. Buat Objek Task & Simpan ke SharedPreferences
-        Task newTask = new Task(taskId, title, subject, deadline, difficulty, authorName, authorAbsent, createdAt);
+        // 4. Buat Objek Task & Simpan ke SharedPreferences
+        Task newTask = new Task(taskId, title, subject, deadline, "Biasa", authorName, authorAbsent, createdAt);
         prefHelper.saveTask(newTask);
 
         Toast.makeText(this, "Task berhasil ditambahkan.", Toast.LENGTH_SHORT).show();
