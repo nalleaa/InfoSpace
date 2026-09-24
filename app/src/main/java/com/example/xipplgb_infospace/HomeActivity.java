@@ -53,14 +53,7 @@ public class HomeActivity extends AppCompatActivity {
         btnMenuProfile = findViewById(R.id.btnMenuProfile);
         btnLogoutHome = findViewById(R.id.btnLogoutHome);
 
-        // 2. Tampilkan Nama & Kelas dengan jelas
-        String nama = prefHelper.getStudentName();
-        int absen = prefHelper.getStudentAbsent();
-
-        tvWelcomeGreeting.setText("Halo, " + nama + " 👋");
-        tvWelcomeClassInfo.setText("Kelas XI PPLG B | Absen " + absen);
-
-        // 3. Tampilkan Banner Status Blok
+        // 2. Tampilkan Banner Status Blok
         BlockInfo info = BlockHelper.getCurrentBlockInfo();
         if (tvBadgeBlock != null) {
             tvBadgeBlock.setText(info.getFullStatusTitle().toUpperCase());
@@ -69,7 +62,7 @@ public class HomeActivity extends AppCompatActivity {
             tvBlockDateRange.setText(info.getDateRange());
         }
 
-        // 4. Hero Banner Klik -> Buka Kalender Blok
+        // 3. Hero Banner Klik -> Buka Kalender Blok
         if (cardBlockHero != null) {
             cardBlockHero.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -79,7 +72,7 @@ public class HomeActivity extends AppCompatActivity {
             });
         }
 
-        // 5. Tombol Menu Kartu Jadwal Pelajaran
+        // 4. Tombol Menu Kartu Jadwal Pelajaran
         if (btnMenuSchedule != null) {
             btnMenuSchedule.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -89,7 +82,7 @@ public class HomeActivity extends AppCompatActivity {
             });
         }
 
-        // 6. Tombol Menu Kartu Kalender Blok
+        // 5. Tombol Menu Kartu Kalender Blok
         if (btnMenuCalendar != null) {
             btnMenuCalendar.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -99,7 +92,7 @@ public class HomeActivity extends AppCompatActivity {
             });
         }
 
-        // 7. Tombol Menu Kartu Tugas
+        // 6. Tombol Menu Kartu Tugas
         if (btnMenuTask != null) {
             btnMenuTask.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -109,7 +102,7 @@ public class HomeActivity extends AppCompatActivity {
             });
         }
 
-        // 8. Tombol Menu Kartu Info
+        // 7. Tombol Menu Kartu Info
         if (btnMenuInfo != null) {
             btnMenuInfo.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -119,7 +112,7 @@ public class HomeActivity extends AppCompatActivity {
             });
         }
 
-        // 9. Tombol Menu Kartu Anggota
+        // 8. Tombol Menu Kartu Anggota
         if (btnMenuMembers != null) {
             btnMenuMembers.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -129,7 +122,7 @@ public class HomeActivity extends AppCompatActivity {
             });
         }
 
-        // 10. Tombol Menu Kartu Profil
+        // 9. Tombol Menu Kartu Profil
         if (btnMenuProfile != null) {
             btnMenuProfile.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -139,7 +132,7 @@ public class HomeActivity extends AppCompatActivity {
             });
         }
 
-        // 11. Tombol Kartu Keluar (Logout)
+        // 10. Tombol Kartu Keluar (Logout)
         if (btnLogoutHome != null) {
             btnLogoutHome.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -154,5 +147,19 @@ public class HomeActivity extends AppCompatActivity {
                 }
             });
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        muatProfilHeader();
+    }
+
+    private void muatProfilHeader() {
+        String displayName = prefHelper.getDisplayName();
+        int absen = prefHelper.getStudentAbsent();
+
+        tvWelcomeGreeting.setText("Halo, " + displayName);
+        tvWelcomeClassInfo.setText("Kelas XI PPLG B | Absen " + absen);
     }
 }

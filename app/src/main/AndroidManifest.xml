@@ -49,6 +49,10 @@
             android:exported="false" />
 
         <activity
+            android:name=".TaskDetailActivity"
+            android:exported="false" />
+
+        <activity
             android:name=".AddInfoActivity"
             android:exported="false" />
 
@@ -57,7 +61,15 @@
             android:exported="false" />
 
         <activity
+            android:name=".InfoDetailActivity"
+            android:exported="false" />
+
+        <activity
             android:name=".MembersActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".MemberDetailActivity"
             android:exported="false" />
 
         <activity

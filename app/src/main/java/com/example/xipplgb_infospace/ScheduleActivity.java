@@ -18,6 +18,7 @@ import com.example.xipplgb_infospace.model.ScheduleItem;
 import com.example.xipplgb_infospace.utils.BlockHelper;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class ScheduleActivity extends AppCompatActivity {
 
@@ -30,7 +31,7 @@ public class ScheduleActivity extends AppCompatActivity {
     private Button btnModeKKW1, btnModeKKW2, btnModeMPU;
     private Button[] modeButtons;
 
-    private Button btnDaySenin, btnDaySelasa, btnDayRabu, btnDayKamis, btnDayJumat;
+    private Button btnDaySenin, btnDaySelasa, btnDayRabu, btnDayKamis, btnDayJumat, btnDaySabtu, btnDayMinggu;
     private Button[] dayButtons;
 
     private BlockInfo currentBlock;
@@ -55,13 +56,15 @@ public class ScheduleActivity extends AppCompatActivity {
         btnModeMPU = findViewById(R.id.btnModeMPU);
         modeButtons = new Button[]{btnModeKKW1, btnModeKKW2, btnModeMPU};
 
-        // Day Buttons
+        // Day Buttons (Senin s/d Minggu)
         btnDaySenin = findViewById(R.id.btnDaySenin);
         btnDaySelasa = findViewById(R.id.btnDaySelasa);
         btnDayRabu = findViewById(R.id.btnDayRabu);
         btnDayKamis = findViewById(R.id.btnDayKamis);
         btnDayJumat = findViewById(R.id.btnDayJumat);
-        dayButtons = new Button[]{btnDaySenin, btnDaySelasa, btnDayRabu, btnDayKamis, btnDayJumat};
+        btnDaySabtu = findViewById(R.id.btnDaySabtu);
+        btnDayMinggu = findViewById(R.id.btnDayMinggu);
+        dayButtons = new Button[]{btnDaySenin, btnDaySelasa, btnDayRabu, btnDayKamis, btnDayJumat, btnDaySabtu, btnDayMinggu};
 
         // 2. Ambil Informasi Blok Berjalan Saat Ini
         currentBlock = BlockHelper.getCurrentBlockInfo();
@@ -74,13 +77,21 @@ public class ScheduleActivity extends AppCompatActivity {
             selectedMode = "MPU";
         }
 
-        // Default hari pilihan
-        String todayName = currentBlock.getDayName();
-        if (todayName.equalsIgnoreCase("Selasa") || todayName.equalsIgnoreCase("Rabu") ||
-                todayName.equalsIgnoreCase("Kamis") || todayName.equalsIgnoreCase("Jumat")) {
-            selectedDay = todayName;
+        // Cek Hari Ini: Jika Sabtu atau Minggu, otomatis pilih Sabtu/Minggu sebagai tampilan awal
+        Calendar todayCal = Calendar.getInstance();
+        int dayOfWeek = todayCal.get(Calendar.DAY_OF_WEEK);
+        if (dayOfWeek == Calendar.SATURDAY) {
+            selectedDay = "Sabtu";
+        } else if (dayOfWeek == Calendar.SUNDAY) {
+            selectedDay = "Minggu";
         } else {
-            selectedDay = "Senin";
+            String todayName = currentBlock.getDayName();
+            if (todayName.equalsIgnoreCase("Selasa") || todayName.equalsIgnoreCase("Rabu") ||
+                    todayName.equalsIgnoreCase("Kamis") || todayName.equalsIgnoreCase("Jumat")) {
+                selectedDay = todayName;
+            } else {
+                selectedDay = "Senin";
+            }
         }
 
         // 3. Setup Events & Active Tabs
@@ -113,6 +124,8 @@ public class ScheduleActivity extends AppCompatActivity {
         btnDayRabu.setOnClickListener(v -> updateDaySelection("Rabu"));
         btnDayKamis.setOnClickListener(v -> updateDaySelection("Kamis"));
         btnDayJumat.setOnClickListener(v -> updateDaySelection("Jumat"));
+        btnDaySabtu.setOnClickListener(v -> updateDaySelection("Sabtu"));
+        btnDayMinggu.setOnClickListener(v -> updateDaySelection("Minggu"));
     }
 
     private void updateModeSelection(String mode) {
@@ -187,6 +200,55 @@ public class ScheduleActivity extends AppCompatActivity {
     private void tampilkanJadwal(String dayName) {
         containerScheduleList.removeAllViews();
 
+        // JIKA HARI SABTU ATAU MINGGU: Tampilkan Kartu Libur Spesial
+        if (dayName.equalsIgnoreCase("Sabtu") || dayName.equalsIgnoreCase("Minggu")) {
+            LinearLayout weekendCard = new LinearLayout(this);
+            weekendCard.setOrientation(LinearLayout.VERTICAL);
+
+            GradientDrawable cardBg = new GradientDrawable();
+            cardBg.setColor(Color.parseColor("#EEF2FF")); // Soft Indigo Blue Tint
+            cardBg.setCornerRadius(24f);
+            cardBg.setStroke(3, Color.parseColor("#C7D2FE"));
+            weekendCard.setBackground(cardBg);
+            weekendCard.setElevation(4f);
+            weekendCard.setPadding(40, 36, 40, 36);
+
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            params.setMargins(0, 0, 0, 20);
+            weekendCard.setLayoutParams(params);
+
+            TextView tvHolidayTitle = new TextView(this);
+            tvHolidayTitle.setText("Hari Libur Pembelajaran");
+            tvHolidayTitle.setTextColor(Color.parseColor("#3730A3"));
+            tvHolidayTitle.setTextSize(17);
+            tvHolidayTitle.setTypeface(null, Typeface.BOLD);
+
+            TextView tvHolidayMsg = new TextView(this);
+            if (dayName.equalsIgnoreCase("Sabtu")) {
+                tvHolidayMsg.setText("Ini adalah hari Sabtu. Selamat Beristirahat dan Persiapkan pembelajaran pekan depan!");
+            } else {
+                tvHolidayMsg.setText("Ini adalah hari Minggu. Selamat Beristirahat dan Persiapkan pembelajaran pekan depan!");
+            }
+            tvHolidayMsg.setTextColor(Color.parseColor("#1E1B4B"));
+            tvHolidayMsg.setTextSize(15);
+            tvHolidayMsg.setLineSpacing(6f, 1f);
+            tvHolidayMsg.setPadding(0, 10, 0, 14);
+
+            TextView tvHint = new TextView(this);
+            tvHint.setText("Anda tetap dapat mengetuk tab hari Senin–Jumat atau memilih tipe blok di atas untuk melihat jadwal pembelajaran.");
+            tvHint.setTextColor(Color.parseColor("#4F46E5"));
+            tvHint.setTextSize(12);
+
+            weekendCard.addView(tvHolidayTitle);
+            weekendCard.addView(tvHolidayMsg);
+            weekendCard.addView(tvHint);
+
+            containerScheduleList.addView(weekendCard);
+            return;
+        }
+
+        // UNTUK HARI SENIN - JUMAT: Muat daftar mapel
         ArrayList<ScheduleItem> items;
         if (selectedMode.startsWith("KK")) {
             int weekNum = Integer.parseInt(selectedMode.replace("KK", ""));
@@ -231,7 +293,7 @@ public class ScheduleActivity extends AppCompatActivity {
 
             // Time & Period Badge (Pill Badge)
             TextView tvTime = new TextView(this);
-            tvTime.setText("⏱️  " + item.getTimeRange() + "  (" + item.getPeriodRange() + ")");
+            tvTime.setText(item.getTimeRange() + " (" + item.getPeriodRange() + ")");
             tvTime.setTextSize(13);
             tvTime.setTypeface(null, Typeface.BOLD);
             tvTime.setTextColor(Color.parseColor("#3730A3"));
@@ -257,7 +319,7 @@ public class ScheduleActivity extends AppCompatActivity {
 
             // Teacher Info
             TextView tvTeacher = new TextView(this);
-            tvTeacher.setText("👨‍🏫 " + item.getTeacherName() + " — Kode: " + item.getTeacherCode());
+            tvTeacher.setText("Pengampu: " + item.getTeacherName() + " — Kode: " + item.getTeacherCode());
             tvTeacher.setTextColor(Color.parseColor("#475569"));
             tvTeacher.setTextSize(13);
 

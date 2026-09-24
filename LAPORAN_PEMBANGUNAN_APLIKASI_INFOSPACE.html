@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>LAPORAN PEMBANGUNAN APLIKASI XI PPLG B - INFOSPACE</title>
+    <style>
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            line-height: 1.5;
+            color: #000000;
+            margin: 50px 60px;
+            background-color: #FFFFFF;
+        }
+        .header-title {
+            text-align: center;
+            border-bottom: 2px solid #000000;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+        }
+        .header-title h1 {
+            font-size: 18pt;
+            font-weight: bold;
+            margin: 0;
+            text-transform: uppercase;
+        }
+        .header-title h2 {
+            font-size: 14pt;
+            font-weight: normal;
+            margin-top: 5px;
+        }
+        h2.section-header {
+            font-size: 13pt;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-top: 25px;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #000000;
+            padding-bottom: 4px;
+        }
+        h3.subsection-header {
+            font-size: 12pt;
+            font-weight: bold;
+            margin-top: 15px;
+            margin-bottom: 6px;
+        }
+        p {
+            font-size: 12pt;
+            text-align: justify;
+            text-indent: 30px;
+            margin-top: 4px;
+            margin-bottom: 8px;
+        }
+        p.no-indent {
+            text-indent: 0;
+        }
+        ol, ul {
+            font-size: 12pt;
+            margin-top: 4px;
+            margin-bottom: 10px;
+            padding-left: 30px;
+        }
+        li {
+            margin-bottom: 4px;
+            text-align: justify;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 12px;
+            margin-bottom: 20px;
+            font-size: 11pt;
+        }
+        th, td {
+            border: 1px solid #000000;
+            padding: 8px 10px;
+            vertical-align: top;
+        }
+        th {
+            background-color: #F0F0F0;
+            font-weight: bold;
+            text-align: center;
+        }
+        code {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 10.5pt;
+        }
+        .code-block {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 10pt;
+            background-color: #FAFAFA;
+            border: 1px solid #000000;
+            padding: 10px;
+            margin-top: 8px;
+            margin-bottom: 12px;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header-title">
+        <h1>LAPORAN PEMBANGUNAN APLIKASI INFOSPACE</h1>
+        <h2>KELAS XI PPLG B — SMK NEGERI 2 SURAKARTA</h2>
+    </div>
+
+    <h2 class="section-header">BAB I: PENDAHULUAN</h2>
+
+    <h3 class="subsection-header">1.1 Latar Belakang</h3>
+    <p>Penerapan sistem pembelajaran berbasis blok pada Sekolah Menengah Kejuruan (SMK) memerlukan manajemen informasi jadwal dan akademik yang terstruktur. Aplikasi XI PPLG B — InfoSpace dikembangkan sebagai solusi perangkat lunak berbasis Android yang bertujuan untuk mengelola jadwal pelajaran harian, direktori tugas kelas, papan pengumuman, direktori peserta didik, serta kalkulasi otomatis siklus minggu blok pembelajaran.</p>
+
+    <h3 class="subsection-header">1.2 Spesifikasi Perangkat Lunak</h3>
+    <table>
+        <tr>
+            <th width="35%">Komponen Kunci</th>
+            <th>Spesifikasi Teknis</th>
+        </tr>
+        <tr>
+            <td>Lingkungan Pengembang (IDE)</td>
+            <td>Android Studio (Versi Terbaru)</td>
+        </tr>
+        <tr>
+            <td>Bahasa Pemrograman</td>
+            <td>Java (JDK 17)</td>
+        </tr>
+        <tr>
+            <td>Bahasa Antarmuka (UI)</td>
+            <td>XML (Material Design)</td>
+        </tr>
+        <tr>
+            <td>Nama Paket (Package Name)</td>
+            <td><code>com.example.xipplgb_infospace</code></td>
+        </tr>
+        <tr>
+            <td>Batas Minimum SDK</td>
+            <td>API 24 (Android 7.0 Nougat)</td>
+        </tr>
+    </table>
+
+    <h2 class="section-header">BAB II: ARSITEKTUR DAN STRUKTUR PERANGKAT LUNAK</h2>
+    <p>Aplikasi ini dibangun menggunakan pola arsitektur <i>Model-View-Controller</i> (MVC) untuk memisahkan logika data, tampilan antarmuka, dan pengendali utama:</p>
+    <ul>
+        <li><b>Model (`model`)</b>: Berisi kelas-kelas entitas yang mendefinisikan variabel dan struktur data objek.</li>
+        <li><b>View (`res/layout`)</b>: Tata letak antarmuka pengguna berbasis berkas XML.</li>
+        <li><b>Controller (`Activity`)</b>: Pengendali logika interaksi dan alur kerja aplikasi berbasis bahasa Java.</li>
+        <li><b>Repository (`data`)</b>: Pusat penyedia data statis seperti daftar siswa, guru, dan jadwal pelajaran.</li>
+        <li><b>Utilities (`utils`)</b>: Kelas pembantu logika perhitungan tanggal dan pengelolaan memori lokal.</li>
+    </ul>
+
+    <h2 class="section-header">BAB III: DETAIL IMPLEMENTASI BERKAS KODE</h2>
+
+    <h3 class="subsection-header">3.1 Paket Data dan Entitas (`model` & `data`)</h3>
+    <table>
+        <tr>
+            <th width="30%">Nama Berkas</th>
+            <th width="20%">Paket</th>
+            <th>Deskripsi Fungsi</th>
+        </tr>
+        <tr>
+            <td><code>Student.java</code></td>
+            <td><code>model</code></td>
+            <td>Merekam atribut siswa yaitu nomor absen dan nama lengkap.</td>
+        </tr>
+        <tr>
+            <td><code>Teacher.java</code></td>
+            <td><code>model</code></td>
+            <td>Merekam atribut guru yaitu kode resmi, nama lengkap, dan kode blok.</td>
+        </tr>
+        <tr>
+            <td><code>ScheduleItem.java</code></td>
+            <td><code>model</code></td>
+            <td>Merekam informasi satu mata pelajaran pada jadwal harian.</td>
+        </tr>
+        <tr>
+            <td><code>Task.java</code></td>
+            <td><code>model</code></td>
+            <td>Merekam atribut tugas kelas yaitu judul, mapel, deadline, dan pembuat.</td>
+        </tr>
+        <tr>
+            <td><code>InfoItem.java</code></td>
+            <td><code>model</code></td>
+            <td>Merekam atribut pengumuman kelas yaitu judul, isi, dan pembuat.</td>
+        </tr>
+        <tr>
+            <td><code>BlockInfo.java</code></td>
+            <td><code>model</code></td>
+            <td>Merekam status kalkulasi blok aktif (tipe blok, minggu ke-, dan rentang tanggal).</td>
+        </tr>
+        <tr>
+            <td><code>StudentData.java</code></td>
+            <td><code>data</code></td>
+            <td>Menyimpan repositori data 36 siswa terdaftar XI PPLG B.</td>
+        </tr>
+        <tr>
+            <td><code>TeacherData.java</code></td>
+            <td><code>data</code></td>
+            <td>Menyimpan repositori 15 guru pengampu Produktif PPLG dan MPU.</td>
+        </tr>
+        <tr>
+            <td><code>TimeTableData.java</code></td>
+            <td><code>data</code></td>
+            <td>Menghitung alokasi bel jam pelajaran 1–12 untuk hari reguler dan hari Jumat.</td>
+        </tr>
+        <tr>
+            <td><code>ScheduleKKData.java</code></td>
+            <td><code>data</code></td>
+            <td>Menyimpan data jadwal mata pelajaran Konsentrasi Keahlian (PPLG).</td>
+        </tr>
+        <tr>
+            <td><code>ScheduleMPUData.java</code></td>
+            <td><code>data</code></td>
+            <td>Menyimpan data jadwal mata pelajaran umum (MPU).</td>
+        </tr>
+    </table>
+
+    <h3 class="subsection-header">3.2 Paket Pembantu Logika (`utils`)</h3>
+    <ul>
+        <li><code>BlockHelper.java</code>: Berfungsi sebagai kalkulator tanggal otomatis yang membaca kalender sistem perangkat (<code>Calendar.getInstance()</code>) untuk menentukan rotasi Minggu Blok KK (W1/W2) atau Blok MPU secara presisi.</li>
+        <li><code>SharedPrefHelper.java</code>: Berfungsi mengelola memori penyimpanan lokal perangkat (<i>SharedPreferences</i>) untuk menyimpan sesi otentikasi login, data tugas baru, dan pengumuman baru secara permanen.</li>
+    </ul>
+
+    <h3 class="subsection-header">3.3 Pengendali Utama (Activity)</h3>
+    <ul>
+        <li><code>LoginActivity.java</code>: Mengendalikan otentikasi masuk pengguna berdasarkan data nomor absen dan nama siswa.</li>
+        <li><code>HomeActivity.java</code>: Mengendalikan tampilan dasbor utama, informasi profil siswa, status blok aktif, dan navigasi menu.</li>
+        <li><code>ScheduleActivity.java</code>: Mengendalikan halaman jadwal pelajaran harian dengan penyaring tipe blok (KK W1, KK W2, MPU) dan penyaring hari (Senin–Jumat). Rentang tanggal hanya ditampilkan pada minggu berjalan aktif.</li>
+        <li><code>CalendarActivity.java</code>: Mengendalikan tampilan kalender rotasi minggu blok pembelajaran.</li>
+        <li><code>TaskActivity.java</code> & <code>AddTaskActivity.java</code>: Mengendalikan direktori tugas kelas dan formulir pendaftaran tugas baru.</li>
+        <li><code>InfoActivity.java</code> & <code>AddInfoActivity.java</code>: Mengendalikan papan pengumuman dan formulir penerbitan informasi kelas.</li>
+        <li><code>MembersActivity.java</code>: Mengendalikan daftar direktori 36 peserta didik kelas XI PPLG B.</li>
+        <li><code>ProfileActivity.java</code>: Mengendalikan tampilan data profil individu siswa dan opsi keluar dari aplikasi.</li>
+    </ul>
+
+    <h2 class="section-header">BAB IV: PETUNJUK TAHAPAN PEMBANGUNAN APLIKASI</h2>
+
+    <h3 class="subsection-header">Tahap 1: Inisialisasi Proyek Baru</h3>
+    <p>Langkah awal dilakukan dengan membuat proyek baru pada Android Studio menggunakan templat <i>Empty Views Activity</i>, menetapkan bahasa pemrograman Java, nama paket <code>com.example.xipplgb_infospace</code>, dan batas minimum SDK API 24.</p>
+
+    <h3 class="subsection-header">Tahap 2: Pengaturan Warna dan Konfigurasi Tema</h3>
+    <p>Konfigurasi warna ditentukan pada berkas <code>res/values/colors.xml</code> untuk menetapkan warna latar belakang utama (<code>#FFFFFF</code>), warna teks utama (<code>#0F172A</code>), dan warna aksen sistem (<code>#4F46E5</code>).</p>
+
+    <h3 class="subsection-header">Tahap 3: Konstruksi Model dan Repositori Data</h3>
+    <p>Membuat paket <code>model</code> dan mendefinisikan kelas POJO. Selanjutnya membuat paket <code>data</code> dan memasukkan data repositori statis siswa terdaftar, data guru pengampu, serta alokasi waktu jam pelajaran.</p>
+
+    <h3 class="subsection-header">Tahap 4: Implementasi Logika Kalkulator dan Penyimpanan</h3>
+    <p>Membuat kelas <code>BlockHelper</code> pada paket <code>utils</code> untuk kalkulasi siklus blok berbasis tanggal acuan. Selanjutnya membuat kelas <code>SharedPrefHelper</code> untuk manajemen otentikasi dan data persisten.</p>
+
+    <h3 class="subsection-header">Tahap 5: Desain Antarmuka Pengguna dan Pengkodean Activity</h3>
+    <p>Menyusun tata letak antarmuka antarhalaman menggunakan berkas XML di dalam folder <code>res/layout</code>, menambahkan aset gambar pada folder <code>res/drawable</code>, serta mengimplementasikan kode Java pengendali interaksi pada masing-masing kelas Activity.</p>
+
+    <h3 class="subsection-header">Tahap 6: Pendaftaran Berkas Manifest dan Pengujian</h3>
+    <p>Mendaftarkan seluruh komponen Activity pada berkas <code>AndroidManifest.xml</code> dan menetapkan <code>LoginActivity</code> sebagai titik masuk utama (<i>LAUNCHER</i>). Tahap akhir dilakukan dengan menjalankan kompilasi berkas (<i>Rebuild Project</i>) dan pengujian pada perangkat Android.</p>
+
+</body>
+</html>

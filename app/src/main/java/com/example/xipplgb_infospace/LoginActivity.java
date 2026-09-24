@@ -17,8 +17,8 @@ import java.util.ArrayList;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private EditText etNama;
     private EditText etAbsen;
+    private EditText etDisplayName;
     private Button btnLogin;
     private SharedPrefHelper prefHelper;
 
@@ -37,8 +37,8 @@ public class LoginActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_login);
 
-        etNama = findViewById(R.id.etNama);
         etAbsen = findViewById(R.id.etAbsen);
+        etDisplayName = findViewById(R.id.etDisplayName);
         btnLogin = findViewById(R.id.btnLogin);
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
@@ -50,17 +50,11 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void validasiDanLogin() {
-        String inputNama = etNama.getText().toString().trim();
         String inputAbsenStr = etAbsen.getText().toString().trim();
-
-        if (inputNama.isEmpty()) {
-            etNama.setError("Nama belum diisi.");
-            etNama.requestFocus();
-            return;
-        }
+        String inputDisplayName = etDisplayName.getText().toString().trim();
 
         if (inputAbsenStr.isEmpty()) {
-            etAbsen.setError("Nomor absen belum diisi.");
+            etAbsen.setError("Nomor absen wajib diisi.");
             etAbsen.requestFocus();
             return;
         }
@@ -74,35 +68,44 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
 
+        // Cari siswa berdasarkan nomor absen sebagai kunci utama
         ArrayList<Student> students = StudentData.getStudents();
-        boolean isValid = false;
-        String officialName = "";
-        int officialAbsent = 0;
+        Student matchedStudent = null;
 
         for (Student student : students) {
-            if (student.getAbsentNumber() == inputAbsen &&
-                    student.getName().equalsIgnoreCase(inputNama)) {
-                isValid = true;
-                officialName = student.getName();
-                officialAbsent = student.getAbsentNumber();
+            if (student.getAbsentNumber() == inputAbsen) {
+                matchedStudent = student;
                 break;
             }
         }
 
-        if (isValid) {
+        if (matchedStudent != null) {
+            String officialName = matchedStudent.getName();
+            int officialAbsent = matchedStudent.getAbsentNumber();
+
+            // Jika Nama Tampilan diisi pengguna, gunakan itu. Jika kosong, gunakan nama panggilan/resmi.
+            String finalDisplayName;
+            if (!inputDisplayName.isEmpty()) {
+                finalDisplayName = inputDisplayName;
+            } else {
+                // Ambil kata pertama dari nama resmi (misal: FELISIANNA OLIVE DRISANA -> FELISIANNA)
+                String[] parts = officialName.split(" ");
+                finalDisplayName = parts[0];
+            }
+
             // Simpan sesi ke SharedPreferences lokal
-            prefHelper.saveLoginSession(officialName, officialAbsent);
-            Toast.makeText(this, "Login berhasil!", Toast.LENGTH_SHORT).show();
+            prefHelper.saveLoginSession(officialName, officialAbsent, finalDisplayName);
+            Toast.makeText(this, "Selamat datang, " + finalDisplayName + "!", Toast.LENGTH_SHORT).show();
 
             pindahKeHome();
         } else {
-            Toast.makeText(this, "Nama atau nomor absen tidak sesuai dengan data XI PPLG B.", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Nomor absen " + inputAbsen + " tidak terdaftar di kelas XI PPLG B.", Toast.LENGTH_LONG).show();
         }
     }
 
     private void pindahKeHome() {
         Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
         startActivity(intent);
-        finish(); // Tutup LoginActivity agar saat tombol back ditekan tidak kembali ke login
+        finish();
     }
 }

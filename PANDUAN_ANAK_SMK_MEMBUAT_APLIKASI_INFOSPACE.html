@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>PANDUAN BIKIN APLIKASI XI PPLG B — INFOSPACE (GAYA ANAK SMK)</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #0F172A;
+            margin: 40px;
+            background-color: #FFFFFF;
+        }
+        h1 {
+            color: #1E40AF;
+            border-bottom: 4px solid #2563EB;
+            padding-bottom: 10px;
+            font-size: 24pt;
+        }
+        h2 {
+            color: #1E293B;
+            background-color: #EFF6FF;
+            padding: 8px 14px;
+            border-left: 5px solid #2563EB;
+            margin-top: 30px;
+            font-size: 15pt;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            margin-bottom: 25px;
+        }
+        th, td {
+            border: 1px solid #CBD5E1;
+            padding: 10px 14px;
+            text-align: left;
+        }
+        th {
+            background-color: #F1F5F9;
+            color: #0F172A;
+            font-weight: bold;
+        }
+        ul, ol {
+            margin-top: 6px;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+        .badge {
+            background-color: #EEF2FF;
+            color: #3730A3;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-family: Consolas, monospace;
+            font-weight: bold;
+        }
+        pre {
+            background-color: #F8FAFC;
+            border: 1px solid #E2E8F0;
+            padding: 14px;
+            border-radius: 8px;
+            font-family: Consolas, monospace;
+            font-size: 10pt;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>🚀 PANDUAN CARA BIKIN APLIKASI INFOSPACE<br><small>Khas Gaya Anak SMK Jurusan PPLG / RPL</small></h1>
+
+    <h2>🎒 BONTOT PENGETAHUAN & TOOLS (SIAPIN ALAT TEMPUR)</h2>
+    <table>
+        <tr>
+            <th width="30%">Software Utama</th>
+            <td>Android Studio (Versi Terbaru)</td>
+        </tr>
+        <tr>
+            <th>Bahasa Pemrograman</th>
+            <td>Java & XML</td>
+        </tr>
+        <tr>
+            <th>Konsep Arsitektur</th>
+            <td><b>MVC (Model - View - Controller)</b>
+                <ul>
+                    <li><b>Model</b>: Format data/wadah variabel.</li>
+                    <li><b>View</b>: Tampilan antarmuka layout (<span class="badge">XML</span>).</li>
+                    <li><b>Controller/Activity</b>: Kodingan logika & event (<span class="badge">Java</span>).</li>
+                </ul>
+            </td>
+        </tr>
+    </table>
+
+    <h2>🛠️ LANGKAH 1: BIKIN PROJECT BARU DI ANDROID STUDIO</h2>
+    <ol>
+        <li>Buka Android Studio ➔ Klik <b>New Project</b>.</li>
+        <li>Pilih templat <b>Empty Views Activity</b> ➔ Klik <b>Next</b>.</li>
+        <li>Isi data project:
+            <ul>
+                <li><b>Name</b>: <span class="badge">XI PPLG B - InfoSpace</span></li>
+                <li><b>Package Name</b>: <span class="badge">com.example.xipplgb_infospace</span></li>
+                <li><b>Language</b>: <span class="badge">Java</span></li>
+                <li><b>Minimum SDK</b>: <span class="badge">API 24 (Android 7.0)</span></li>
+            </ul>
+        </li>
+        <li>Klik <b>Finish</b> dan tunggu Gradle selesai sync.</li>
+    </ol>
+
+    <h2>🎨 LANGKAH 2: SET WARNA APLIKASI (`colors.xml`)</h2>
+    <p>Buka file <span class="badge">res/values/colors.xml</span> dan ganti warnanya biar tampilan aplikasi bersih & modern:</p>
+<pre>
+&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;resources&gt;
+    &lt;color name="bg_main"&gt;#FFFFFF&lt;/color&gt;
+    &lt;color name="white"&gt;#FFFFFF&lt;/color&gt;
+    &lt;color name="primary_indigo"&gt;#4F46E5&lt;/color&gt;
+    &lt;color name="primary_indigo_dark"&gt;#3730A3&lt;/color&gt;
+    &lt;color name="text_primary"&gt;#0F172A&lt;/color&gt;
+    &lt;color name="text_secondary"&gt;#475569&lt;/color&gt;
+    &lt;color name="danger_red"&gt;#EF4444&lt;/color&gt;
+&lt;/resources&gt;
+</pre>
+
+    <h2>🧱 LANGKAH 3: BIKIN FOLDER PACKAGE & FORMAT DATA (`model`)</h2>
+    <p>Klik kanan pada package <span class="badge">com.example.xipplgb_infospace</span> ➔ <b>New</b> ➔ <b>Package</b> ➔ beri nama <b><span class="badge">model</span></b>.</p>
+    <p>Di dalam folder <span class="badge">model</span>, buat 7 file Java POJO (Format Wadah Data):</p>
+    <ol>
+        <li><b>Student.java</b> ➔ Format data siswa (<span class="badge">absentNumber</span>, <span class="badge">name</span>).</li>
+        <li><b>Teacher.java</b> ➔ Format data guru (<span class="badge">officialCode</span>, <span class="badge">name</span>, <span class="badge">blockCode</span>).</li>
+        <li><b>ScheduleItem.java</b> ➔ Format item mapel (<span class="badge">subjectName</span>, <span class="badge">periodRange</span>, <span class="badge">timeRange</span>, <span class="badge">teacherName</span>, <span class="badge">teacherCode</span>).</li>
+        <li><b>Task.java</b> ➔ Format tugas (<span class="badge">id</span>, <span class="badge">title</span>, <span class="badge">subject</span>, <span class="badge">deadline</span>, <span class="badge">authorName</span>, <span class="badge">createdAt</span>).</li>
+        <li><b>InfoItem.java</b> ➔ Format pengumuman (<span class="badge">id</span>, <span class="badge">title</span>, <span class="badge">content</span>, <span class="badge">authorName</span>, <span class="badge">createdAt</span>).</li>
+        <li><b>BlockInfo.java</b> ➔ Format status blok (<span class="badge">blockType</span>, <span class="badge">weekNumber</span>, <span class="badge">dateRange</span>, <span class="badge">dayName</span>).</li>
+        <li><b>TimeSlot.java</b> ➔ Format jam bel sekolah (<span class="badge">periodNumber</span>, <span class="badge">startTime</span>, <span class="badge">endTime</span>).</li>
+    </ol>
+
+    <h2>🗄️ LANGKAH 4: BIKIN DATABASE LOKAL (`data`)</h2>
+    <p>Buat package baru bernama <b><span class="badge">data</span></b>. Ini ibarat "Database Sementara" tempat nyimpen data asli:</p>
+    <ol>
+        <li><b>StudentData.java</b>: Isikan array list berisi <b>36 Nama & Absen Siswa XI PPLG B</b> asli.</li>
+        <li><b>TeacherData.java</b>: Isikan array list <b>15 Guru</b> (Produktif PPLG Kode 134-139 & MPU Kode 5-67).</li>
+        <li><b>TimeTableData.java</b>: Atur alokasi jam bel sekolah (Jam ke-1 s/d 12) reguler & khusus hari Jumat.</li>
+        <li><b>ScheduleKKData.java</b>: Masukkan jadwal mapel Produktif PPLG (Web, Mobile, Database, KIK, KKA, PTGM) siklus W1 & W2.</li>
+        <li><b>ScheduleMPUData.java</b>: Masukkan jadwal mapel MPU (Agama, PP, Bindo, Mat, Bing, PJOK, Sejarah, B.Jawa, BK).</li>
+    </ol>
+
+    <h2>⚙️ LANGKAH 5: BIKIN KALKULATOR BLOK & MEMORI HP (`utils`)</h2>
+    <p>Buat package baru bernama <b><span class="badge">utils</span></b>:</p>
+    <ol>
+        <li><b>BlockHelper.java</b>: <b>Kalkulator Tanggal Otomatis</b>. Kodingan ini nge-baca tanggal dari HP kamu (<span class="badge">Calendar.getInstance()</span>) dan otomatis ngitung minggu ini masuk Blok KK (W1/W2) atau Blok MPU!</li>
+        <li><b>SharedPrefHelper.java</b>: <b>Brankas Memori HP</b>. Berfungsi nyimpen sesi login siswa, tugas baru, dan pengumuman baru biar nggak hilang pas aplikasi ditutup.</li>
+    </ol>
+
+    <h2>🖼️ LANGKAH 6: SIAPIN GAMBAR IKON & DESAIN KARTU (`res/drawable`)</h2>
+    <ol>
+        <li><b>Upload Gambar Ikon</b>: Copy 7 file gambar PNG tombol menu (<span class="badge">menu_jadwal.png</span>, <span class="badge">menu_jadwal_blok.png</span>, <span class="badge">menu_tugas.png</span>, <span class="badge">menu_info.png</span>, <span class="badge">menu_anggota.png</span>, <span class="badge">menu_profil.png</span>, <span class="badge">menu_keluar.png</span>) terus paste di folder <span class="badge">res/drawable</span>.</li>
+        <li><b>Bikin File Shape XML Background</b>:
+            <ul>
+                <li><span class="badge">bg_banner_gradient.xml</span> (Latar gradient Indigo header)</li>
+                <li><span class="badge">bg_menu_card_elevated.xml</span> (Kartu menu grid membulat <span class="badge">16dp</span>)</li>
+                <li><span class="badge">bg_menu_danger_card.xml</span> (Kartu tombol keluar merah muda)</li>
+                <li><span class="badge">bg_button_active.xml</span> & <span class="badge">bg_button_inactive.xml</span></li>
+            </ul>
+        </li>
+    </ol>
+
+    <h2>📱 LANGKAH 7: BIKIN TAMPILAN XML & KODINGAN JAVA ACTIVITY</h2>
+    <ol>
+        <li><b>Halaman Login (<span class="badge">activity_login.xml</span> & <span class="badge">LoginActivity.java</span>)</b>:
+            <br>Bikin input nama & absen. Pas tombol diklik, cek datanya ke <span class="badge">StudentData</span>. Kalau cocok, simpan sesi & buka <span class="badge">HomeActivity</span>.</li>
+        <li><b>Dashboard Home (<span class="badge">activity_home.xml</span> & <span class="badge">HomeActivity.java</span>)</b>:
+            <br>Tampilkan nama siswa, info kelas, hero banner status blok, dan 7 kartu menu utama.</li>
+        <li><b>Jadwal Pelajaran (<span class="badge">activity_schedule.xml</span> & <span class="badge">ScheduleActivity.java</span>)</b>:
+            <br>Tampilkan filter tipe blok (<span class="badge">Blok KK W1</span>, <span class="badge">Blok KK W2</span>, <span class="badge">Blok MPU</span>) dan tab hari (<span class="badge">Senin</span>–<span class="badge">Jumat</span>). Tanggalan cuma dimunculin di minggu yang sedang berjalan aktif.</li>
+        <li><b>Halaman Pendukung Lainnya</b>:
+            <ul>
+                <li>Kalender Blok (<span class="badge">CalendarActivity</span>)</li>
+                <li>Tugas Kelas (<span class="badge">TaskActivity</span> & <span class="badge">AddTaskActivity</span>)</li>
+                <li>Info Kelas (<span class="badge">InfoActivity</span> & <span class="badge">AddInfoActivity</span>)</li>
+                <li>Anggota Kelas (<span class="badge">MembersActivity</span>)</li>
+                <li>Profil Saya (<span class="badge">ProfileActivity</span>)</li>
+            </ul>
+        </li>
+    </ol>
+
+    <h2>🚀 LANGKAH 8: SETTING MANIFEST & RUN APLIKASI!</h2>
+    <ol>
+        <li>Buka <span class="badge">AndroidManifest.xml</span>, daftarkan semua Activity.</li>
+        <li>Set <b><span class="badge">LoginActivity</span></b> sebagai <span class="badge">LAUNCHER</span> utama.</li>
+        <li>Klik menu <b>Build ➔ Rebuild Project</b>.</li>
+        <li>Colokkan HP Android kamu via kabel USB (aktifkan USB Debugging) ➔ Klik <b>Run App</b> (tombol Play hijau ▶️)!</li>
+    </ol>
+
+</body>
+</html>

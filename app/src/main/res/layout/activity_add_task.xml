@@ -129,9 +129,35 @@
                     android:layout_height="48dp"
                     android:layout_marginTop="8dp"
                     android:background="@drawable/bg_input"
-                    android:hint="Contoh: 25 September 2026"
+                    android:clickable="true"
+                    android:focusable="false"
+                    android:hint="Ketuk untuk pilih tanggal batas waktu dari kalender"
                     android:paddingStart="14dp"
                     android:paddingEnd="14dp"
+                    android:textColor="@color/text_primary"
+                    android:textColorHint="@color/text_muted"
+                    android:textSize="14sp" />
+
+                <!-- Input Deskripsi Tugas -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="Deskripsi / Detail Tugas (Opsional)"
+                    android:textColor="@color/text_primary"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/etTaskDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/bg_input"
+                    android:gravity="top|start"
+                    android:hint="Tuliskan petunjuk / catatan tugas secara detail..."
+                    android:inputType="textMultiLine"
+                    android:padding="14dp"
                     android:textColor="@color/text_primary"
                     android:textColorHint="@color/text_muted"
                     android:textSize="14sp" />

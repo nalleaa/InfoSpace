@@ -20,7 +20,7 @@
         android:paddingBottom="16dp">
 
         <TextView
-            android:id="@+id/btnBackProfile"
+            android:id="@+id/btnBackMemberDetail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="?attr/selectableItemBackground"
@@ -42,7 +42,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="end|center_vertical"
-            android:text="Profil Saya"
+            android:text="Profil Anggota"
             android:textColor="@color/text_primary"
             android:textSize="18sp"
             android:textStyle="bold" />
@@ -78,7 +78,7 @@
                     android:textSize="36sp" />
 
                 <TextView
-                    android:id="@+id/tvProfileName"
+                    android:id="@+id/tvMemberDetailName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
@@ -89,7 +89,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/tvProfileClassAbsent"
+                    android:id="@+id/tvMemberDetailClassAbsent"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
@@ -99,23 +99,24 @@
                     android:textSize="14sp"
                     android:textStyle="bold" />
 
-                <!-- Tombol Edit Nama Tampilan -->
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btnEditProfile"
+                <TextView
+                    android:id="@+id/tvMemberDetailCurrentUserBadge"
                     android:layout_width="wrap_content"
-                    android:layout_height="38dp"
-                    android:layout_marginTop="14dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
                     android:background="@drawable/bg_button_inactive"
-                    android:paddingStart="16dp"
-                    android:paddingEnd="16dp"
-                    android:text="✏️ Edit Nama Tampilan"
-                    android:textAllCaps="false"
+                    android:paddingStart="14dp"
+                    android:paddingTop="4dp"
+                    android:paddingEnd="14dp"
+                    android:paddingBottom="4dp"
+                    android:text="⭐ Akun Anda Saat Ini"
                     android:textColor="@color/primary_indigo"
-                    android:textSize="13sp"
-                    android:textStyle="bold" />
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:visibility="gone" />
             </LinearLayout>
 
-            <!-- Card Detail Informasi -->
+            <!-- Card Detail Informasi Umum Siswa -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -128,7 +129,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Informasi Diri &amp; Sekolah"
+                    android:text="Informasi Umum Peserta Didik"
                     android:textColor="@color/text_primary"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -143,12 +144,12 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Nama Resmi Siswa"
+                    android:text="Nama Lengkap Resmi"
                     android:textColor="@color/text_secondary"
                     android:textSize="13sp" />
 
                 <TextView
-                    android:id="@+id/tvProfileOfficialName"
+                    android:id="@+id/tvMemberDetailOfficialName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
@@ -161,15 +162,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="14dp"
-                    android:text="Sekolah"
+                    android:text="Nomor Absen Kelas"
                     android:textColor="@color/text_secondary"
                     android:textSize="13sp" />
 
                 <TextView
+                    android:id="@+id/tvMemberDetailAbsentNumber"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
-                    android:text="SMK Negeri 2 Surakarta"
+                    android:text="Absen -"
                     android:textColor="@color/text_primary"
                     android:textSize="15sp"
                     android:textStyle="bold" />
@@ -178,7 +180,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="14dp"
-                    android:text="Jurusan / Kelas"
+                    android:text="Sekolah &amp; Jurusan"
                     android:textColor="@color/text_secondary"
                     android:textSize="13sp" />
 
@@ -186,7 +188,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
-                    android:text="PPLG — XI PPLG B"
+                    android:text="SMK Negeri 2 Surakarta\nPPLG — XI PPLG B"
                     android:textColor="@color/text_primary"
                     android:textSize="15sp"
                     android:textStyle="bold" />
@@ -195,12 +197,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="14dp"
-                    android:text="Status Blok Saat Ini"
+                    android:text="Status Blok Pembelajaran Saat Ini"
                     android:textColor="@color/text_secondary"
                     android:textSize="13sp" />
 
                 <TextView
-                    android:id="@+id/tvProfileBlockStatus"
+                    android:id="@+id/tvMemberDetailBlockStatus"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
@@ -209,19 +211,6 @@
                     android:textSize="15sp"
                     android:textStyle="bold" />
             </LinearLayout>
-
-            <!-- Tombol Keluar -->
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btnLogoutProfile"
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:layout_marginTop="24dp"
-                android:background="@drawable/bg_btn_logout"
-                android:text="Keluar"
-                android:textAllCaps="false"
-                android:textColor="@color/danger_red"
-                android:textSize="16sp"
-                android:textStyle="bold" />
 
         </LinearLayout>
     </ScrollView>

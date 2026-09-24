@@ -2,6 +2,7 @@ package com.example.xipplgb_infospace;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
@@ -52,7 +53,7 @@ public class MembersActivity extends AppCompatActivity {
 
         int currentAbsent = prefHelper.getStudentAbsent();
 
-        for (Student student : students) {
+        for (final Student student : students) {
             boolean isCurrentUser = (student.getAbsentNumber() == currentAbsent);
 
             // Card per siswa
@@ -62,6 +63,8 @@ public class MembersActivity extends AppCompatActivity {
             card.setElevation(isCurrentUser ? 4f : 2f);
             card.setGravity(Gravity.CENTER_VERTICAL);
             card.setPadding(20, 16, 20, 16);
+            card.setClickable(true);
+            card.setFocusable(true);
 
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
@@ -114,6 +117,17 @@ public class MembersActivity extends AppCompatActivity {
                 tvYou.setPadding(16, 6, 16, 6);
                 card.addView(tvYou);
             }
+
+            // FITUR KLIK NAMA SISWA: Buka Halaman Profil Anggota
+            card.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(MembersActivity.this, MemberDetailActivity.class);
+                    intent.putExtra("STUDENT_ABSENT", student.getAbsentNumber());
+                    intent.putExtra("STUDENT_NAME", student.getName());
+                    startActivity(intent);
+                }
+            });
 
             containerMembersList.addView(card);
         }
