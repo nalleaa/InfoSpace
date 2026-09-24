@@ -23,7 +23,6 @@
             </intent-filter>
         </activity>
 
-        <!-- MainActivity diset exported="false" (hanya bisa dibuka lewat kodingan setelah login) -->
         <activity
             android:name=".MainActivity"
             android:exported="false"
@@ -37,28 +36,30 @@
             android:name=".ScheduleActivity"
             android:exported="false" />
 
-        <!-- CalendarActivity ditambahkan di sini -->
         <activity
             android:name=".CalendarActivity"
             android:exported="false" />
+
         <activity
             android:name=".TaskActivity"
             android:exported="false" />
+
         <activity
             android:name=".AddTaskActivity"
             android:exported="false" />
+
         <activity
             android:name=".AddInfoActivity"
             android:exported="false" />
+
         <activity
             android:name=".InfoActivity"
             android:exported="false" />
-        <activity
-            android:name=".ChecklistActivity"
-            android:exported="false" />
+
         <activity
             android:name=".MembersActivity"
             android:exported="false" />
+
         <activity
             android:name=".ProfileActivity"
             android:exported="false" />

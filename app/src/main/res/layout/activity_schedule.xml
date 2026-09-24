@@ -59,7 +59,7 @@
             android:orientation="vertical"
             android:padding="20dp">
 
-            <!-- Card Banner Status Blok (Colorful Gradient Hero Banner) -->
+            <!-- Card Banner Status Blok -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -87,39 +87,105 @@
                     android:textSize="14sp" />
             </LinearLayout>
 
-            <!-- Label Pilih Hari -->
+            <!-- Section Filter Tipe Blok (MPU & KK W1-W4) -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:text="Pilih Hari Pembelajaran"
+                android:layout_marginTop="20dp"
+                android:text="Pilih Tipe / Minggu Blok"
                 android:textColor="@color/text_primary"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
-            <!-- Tombol Tab Hari (Besar & Berwarna) -->
             <HorizontalScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="10dp"
                 android:scrollbars="none">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:paddingTop="4dp"
-                    android:paddingBottom="8dp">
+                    android:paddingTop="2dp"
+                    android:paddingBottom="6dp">
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btnModeKKW1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="42dp"
+                        android:layout_marginEnd="8dp"
+                        android:background="@drawable/bg_button_active"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp"
+                        android:text="Blok KK W1"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btnModeKKW2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="42dp"
+                        android:layout_marginEnd="8dp"
+                        android:background="@drawable/bg_button_inactive"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp"
+                        android:text="Blok KK W2"
+                        android:textAllCaps="false"
+                        android:textColor="@color/text_secondary"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btnModeMPU"
+                        android:layout_width="wrap_content"
+                        android:layout_height="42dp"
+                        android:background="@drawable/bg_button_inactive"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp"
+                        android:text="Blok MPU (Umum)"
+                        android:textAllCaps="false"
+                        android:textColor="@color/text_secondary"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </HorizontalScrollView>
+
+            <!-- Label Pilih Hari -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Pilih Hari Pembelajaran"
+                android:textColor="@color/text_primary"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <!-- Tombol Tab Hari (Senin - Jumat) -->
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:scrollbars="none">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingTop="2dp"
+                    android:paddingBottom="6dp">
 
                     <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/btnDaySenin"
                         android:layout_width="wrap_content"
-                        android:layout_height="48dp"
-                        android:layout_marginEnd="10dp"
+                        android:layout_height="44dp"
+                        android:layout_marginEnd="8dp"
                         android:background="@drawable/bg_button_active"
-                        android:minWidth="96dp"
-                        android:paddingStart="20dp"
-                        android:paddingEnd="20dp"
+                        android:minWidth="88dp"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp"
                         android:text="Senin"
                         android:textAllCaps="false"
                         android:textColor="@color/white"
@@ -129,12 +195,12 @@
                     <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/btnDaySelasa"
                         android:layout_width="wrap_content"
-                        android:layout_height="48dp"
-                        android:layout_marginEnd="10dp"
+                        android:layout_height="44dp"
+                        android:layout_marginEnd="8dp"
                         android:background="@drawable/bg_button_inactive"
-                        android:minWidth="96dp"
-                        android:paddingStart="20dp"
-                        android:paddingEnd="20dp"
+                        android:minWidth="88dp"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp"
                         android:text="Selasa"
                         android:textAllCaps="false"
                         android:textColor="@color/text_secondary"
@@ -144,12 +210,12 @@
                     <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/btnDayRabu"
                         android:layout_width="wrap_content"
-                        android:layout_height="48dp"
-                        android:layout_marginEnd="10dp"
+                        android:layout_height="44dp"
+                        android:layout_marginEnd="8dp"
                         android:background="@drawable/bg_button_inactive"
-                        android:minWidth="96dp"
-                        android:paddingStart="20dp"
-                        android:paddingEnd="20dp"
+                        android:minWidth="88dp"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp"
                         android:text="Rabu"
                         android:textAllCaps="false"
                         android:textColor="@color/text_secondary"
@@ -159,12 +225,12 @@
                     <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/btnDayKamis"
                         android:layout_width="wrap_content"
-                        android:layout_height="48dp"
-                        android:layout_marginEnd="10dp"
+                        android:layout_height="44dp"
+                        android:layout_marginEnd="8dp"
                         android:background="@drawable/bg_button_inactive"
-                        android:minWidth="96dp"
-                        android:paddingStart="20dp"
-                        android:paddingEnd="20dp"
+                        android:minWidth="88dp"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp"
                         android:text="Kamis"
                         android:textAllCaps="false"
                         android:textColor="@color/text_secondary"
@@ -174,11 +240,11 @@
                     <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/btnDayJumat"
                         android:layout_width="wrap_content"
-                        android:layout_height="48dp"
+                        android:layout_height="44dp"
                         android:background="@drawable/bg_button_inactive"
-                        android:minWidth="96dp"
-                        android:paddingStart="20dp"
-                        android:paddingEnd="20dp"
+                        android:minWidth="88dp"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp"
                         android:text="Jumat"
                         android:textAllCaps="false"
                         android:textColor="@color/text_secondary"
@@ -192,7 +258,7 @@
                 android:id="@+id/tvActiveDayTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="20dp"
                 android:text="Jadwal Hari Senin"
                 android:textColor="@color/text_primary"
                 android:textSize="18sp"
@@ -203,7 +269,7 @@
                 android:id="@+id/containerScheduleList"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="14dp"
+                android:layout_marginTop="12dp"
                 android:orientation="vertical" />
 
         </LinearLayout>

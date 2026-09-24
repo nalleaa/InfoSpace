@@ -27,10 +27,14 @@ public class ScheduleActivity extends AppCompatActivity {
     private TextView tvActiveDayTitle;
     private LinearLayout containerScheduleList;
 
+    private Button btnModeKKW1, btnModeKKW2, btnModeMPU;
+    private Button[] modeButtons;
+
     private Button btnDaySenin, btnDaySelasa, btnDayRabu, btnDayKamis, btnDayJumat;
     private Button[] dayButtons;
 
     private BlockInfo currentBlock;
+    private String selectedMode = "KK1"; // Default mode
     private String selectedDay = "Senin";
 
     @Override
@@ -45,20 +49,32 @@ public class ScheduleActivity extends AppCompatActivity {
         tvActiveDayTitle = findViewById(R.id.tvActiveDayTitle);
         containerScheduleList = findViewById(R.id.containerScheduleList);
 
+        // Mode Buttons (Filter Tipe Blok)
+        btnModeKKW1 = findViewById(R.id.btnModeKKW1);
+        btnModeKKW2 = findViewById(R.id.btnModeKKW2);
+        btnModeMPU = findViewById(R.id.btnModeMPU);
+        modeButtons = new Button[]{btnModeKKW1, btnModeKKW2, btnModeMPU};
+
+        // Day Buttons
         btnDaySenin = findViewById(R.id.btnDaySenin);
         btnDaySelasa = findViewById(R.id.btnDaySelasa);
         btnDayRabu = findViewById(R.id.btnDayRabu);
         btnDayKamis = findViewById(R.id.btnDayKamis);
         btnDayJumat = findViewById(R.id.btnDayJumat);
-
         dayButtons = new Button[]{btnDaySenin, btnDaySelasa, btnDayRabu, btnDayKamis, btnDayJumat};
 
-        // 2. Ambil Informasi Blok Berjalan
+        // 2. Ambil Informasi Blok Berjalan Saat Ini
         currentBlock = BlockHelper.getCurrentBlockInfo();
-        tvScheduleBlockTitle.setText(currentBlock.getFullStatusTitle().toUpperCase());
-        tvScheduleDateRange.setText(currentBlock.getDateRange());
 
-        // Default: jika hari ini Senin-Jumat, langsung pilih hari ini
+        if (currentBlock.getBlockType().equalsIgnoreCase("KK")) {
+            int week = currentBlock.getWeekNumber();
+            if (week > 2) week = ((week - 1) % 2) + 1; // Map week 3->1, week 4->2
+            selectedMode = "KK" + week;
+        } else {
+            selectedMode = "MPU";
+        }
+
+        // Default hari pilihan
         String todayName = currentBlock.getDayName();
         if (todayName.equalsIgnoreCase("Selasa") || todayName.equalsIgnoreCase("Rabu") ||
                 todayName.equalsIgnoreCase("Kamis") || todayName.equalsIgnoreCase("Jumat")) {
@@ -67,9 +83,14 @@ public class ScheduleActivity extends AppCompatActivity {
             selectedDay = "Senin";
         }
 
+        // 3. Setup Events & Active Tabs
+        setupModeButtons();
+        setupDayButtons();
+
+        updateModeSelection(selectedMode);
         updateDaySelection(selectedDay);
 
-        // 3. Tombol Kembali
+        // 4. Tombol Kembali
         if (btnBackSchedule != null) {
             btnBackSchedule.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -78,29 +99,78 @@ public class ScheduleActivity extends AppCompatActivity {
                 }
             });
         }
-
-        // 4. Pasang Listener Tombol Hari
-        setupDayButton(btnDaySenin, "Senin");
-        setupDayButton(btnDaySelasa, "Selasa");
-        setupDayButton(btnDayRabu, "Rabu");
-        setupDayButton(btnDayKamis, "Kamis");
-        setupDayButton(btnDayJumat, "Jumat");
     }
 
-    private void setupDayButton(final Button btn, final String dayName) {
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                selectedDay = dayName;
-                updateDaySelection(selectedDay);
+    private void setupModeButtons() {
+        btnModeKKW1.setOnClickListener(v -> updateModeSelection("KK1"));
+        btnModeKKW2.setOnClickListener(v -> updateModeSelection("KK2"));
+        btnModeMPU.setOnClickListener(v -> updateModeSelection("MPU"));
+    }
+
+    private void setupDayButtons() {
+        btnDaySenin.setOnClickListener(v -> updateDaySelection("Senin"));
+        btnDaySelasa.setOnClickListener(v -> updateDaySelection("Selasa"));
+        btnDayRabu.setOnClickListener(v -> updateDaySelection("Rabu"));
+        btnDayKamis.setOnClickListener(v -> updateDaySelection("Kamis"));
+        btnDayJumat.setOnClickListener(v -> updateDaySelection("Jumat"));
+    }
+
+    private void updateModeSelection(String mode) {
+        selectedMode = mode;
+
+        // Cek apakah mode yang dipilih sama dengan minggu aktif yang sedang dijalani
+        boolean isCurrentActiveWeek = false;
+        if (currentBlock.getBlockType().equalsIgnoreCase("KK")) {
+            int activeWeek = currentBlock.getWeekNumber();
+            if (activeWeek > 2) activeWeek = ((activeWeek - 1) % 2) + 1;
+            String activeKey = "KK" + activeWeek;
+            if (mode.equalsIgnoreCase(activeKey)) {
+                isCurrentActiveWeek = true;
             }
-        });
+        } else {
+            if (mode.equalsIgnoreCase("MPU")) {
+                isCurrentActiveWeek = true;
+            }
+        }
+
+        if (mode.startsWith("KK")) {
+            int week = Integer.parseInt(mode.replace("KK", ""));
+            tvScheduleBlockTitle.setText("BLOK KK — MINGGU KE-" + week);
+        } else {
+            tvScheduleBlockTitle.setText("BLOK MPU (MATA PELAJARAN UMUM)");
+        }
+
+        // Tanggalan HANYA MUNCUL jika minggu yang dipilih adalah minggu yang sedang dijalani!
+        if (isCurrentActiveWeek && tvScheduleDateRange != null) {
+            tvScheduleDateRange.setVisibility(View.VISIBLE);
+            tvScheduleDateRange.setText(currentBlock.getDateRange() + " (Minggu Berjalan)");
+        } else if (tvScheduleDateRange != null) {
+            tvScheduleDateRange.setVisibility(View.GONE);
+        }
+
+        // Highlight tombol mode yang aktif
+        for (Button btn : modeButtons) {
+            boolean isSelected = false;
+            if (mode.equals("KK1") && btn == btnModeKKW1) isSelected = true;
+            if (mode.equals("KK2") && btn == btnModeKKW2) isSelected = true;
+            if (mode.equals("MPU") && btn == btnModeMPU) isSelected = true;
+
+            if (isSelected) {
+                btn.setBackgroundResource(R.drawable.bg_button_active);
+                btn.setTextColor(Color.WHITE);
+            } else {
+                btn.setBackgroundResource(R.drawable.bg_button_inactive);
+                btn.setTextColor(Color.parseColor("#475569"));
+            }
+        }
+
+        tampilkanJadwal(selectedDay);
     }
 
     private void updateDaySelection(String dayName) {
+        selectedDay = dayName;
         tvActiveDayTitle.setText("Jadwal Hari " + dayName);
 
-        // Ubah tampilan tombol yang sedang aktif
         for (Button btn : dayButtons) {
             if (btn.getText().toString().equalsIgnoreCase(dayName)) {
                 btn.setBackgroundResource(R.drawable.bg_button_active);
@@ -111,16 +181,16 @@ public class ScheduleActivity extends AppCompatActivity {
             }
         }
 
-        // Tampilkan daftar jadwal untuk hari yang dipilih
-        tampilkanJadwal(dayName);
+        tampilkanJadwal(selectedDay);
     }
 
     private void tampilkanJadwal(String dayName) {
         containerScheduleList.removeAllViews();
 
         ArrayList<ScheduleItem> items;
-        if (currentBlock.getBlockType().equalsIgnoreCase("KK")) {
-            items = ScheduleKKData.getSchedule(currentBlock.getWeekNumber(), dayName);
+        if (selectedMode.startsWith("KK")) {
+            int weekNum = Integer.parseInt(selectedMode.replace("KK", ""));
+            items = ScheduleKKData.getSchedule(weekNum, dayName);
         } else {
             items = ScheduleMPUData.getScheduleForDay(dayName);
         }
@@ -146,18 +216,17 @@ public class ScheduleActivity extends AppCompatActivity {
             LinearLayout card = new LinearLayout(this);
             card.setOrientation(LinearLayout.VERTICAL);
 
-            // Vibrant white card background with crisp rounded corners and stroke
             GradientDrawable cardBg = new GradientDrawable();
             cardBg.setColor(Color.WHITE);
-            cardBg.setCornerRadius(28f);
-            cardBg.setStroke(3, Color.parseColor("#CBD5E1"));
+            cardBg.setCornerRadius(24f);
+            cardBg.setStroke(2, Color.parseColor("#CBD5E1"));
             card.setBackground(cardBg);
-            card.setElevation(4f);
-            card.setPadding(36, 28, 36, 28);
+            card.setElevation(3f);
+            card.setPadding(32, 24, 32, 24);
 
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-            params.setMargins(0, 0, 0, 20);
+            params.setMargins(0, 0, 0, 18);
             card.setLayoutParams(params);
 
             // Time & Period Badge (Pill Badge)
@@ -171,26 +240,26 @@ public class ScheduleActivity extends AppCompatActivity {
             pillBg.setColor(Color.parseColor("#EEF2FF"));
             pillBg.setCornerRadius(20f);
             tvTime.setBackground(pillBg);
-            tvTime.setPadding(24, 10, 24, 10);
+            tvTime.setPadding(20, 8, 20, 8);
 
             LinearLayout.LayoutParams pillParams = new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-            pillParams.setMargins(0, 0, 0, 12);
+            pillParams.setMargins(0, 0, 0, 10);
             tvTime.setLayoutParams(pillParams);
 
-            // Subject Name (Large and bold)
+            // Subject Name
             TextView tvSubject = new TextView(this);
             tvSubject.setText(item.getSubjectName());
             tvSubject.setTextColor(Color.parseColor("#0F172A"));
-            tvSubject.setTextSize(17);
+            tvSubject.setTextSize(16);
             tvSubject.setTypeface(null, Typeface.BOLD);
-            tvSubject.setPadding(0, 4, 0, 6);
+            tvSubject.setPadding(0, 4, 0, 4);
 
             // Teacher Info
             TextView tvTeacher = new TextView(this);
             tvTeacher.setText("👨‍🏫 " + item.getTeacherName() + " — Kode: " + item.getTeacherCode());
             tvTeacher.setTextColor(Color.parseColor("#475569"));
-            tvTeacher.setTextSize(14);
+            tvTeacher.setTextSize(13);
 
             card.addView(tvTime);
             card.addView(tvSubject);

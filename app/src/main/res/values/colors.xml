@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Background & Card -->
-    <color name="bg_main">#F1F5F9</color>
+    <color name="bg_main">#FFFFFF</color>
     <color name="white">#FFFFFF</color>
 
     <!-- Primary & Gradient Accent Colors -->

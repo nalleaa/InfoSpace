@@ -177,14 +177,14 @@
                     android:textStyle="bold" />
             </LinearLayout>
 
-            <!-- Tombol Keluar Sesi -->
+            <!-- Tombol Keluar -->
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnLogoutProfile"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:layout_marginTop="24dp"
                 android:background="@drawable/bg_btn_logout"
-                android:text="🚪  Keluar dari Sesi"
+                android:text="🚪  Keluar"
                 android:textAllCaps="false"
                 android:textColor="@color/danger_red"
                 android:textSize="16sp"

@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>PANDUAN LANGKAH DEMI LANGKAH MEMBUAT APLIKASI INFOSPACE</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            line-height: 1.6;
+            color: #0F172A;
+            margin: 40px;
+            background-color: #FFFFFF;
+        }
+        h1 {
+            color: #1E40AF;
+            border-bottom: 3px solid #2563EB;
+            padding-bottom: 10px;
+            font-size: 22pt;
+        }
+        h2 {
+            color: #1E293B;
+            background-color: #EFF6FF;
+            padding: 8px 14px;
+            border-left: 5px solid #2563EB;
+            margin-top: 30px;
+            font-size: 15pt;
+        }
+        h3 {
+            color: #0369A1;
+            margin-top: 20px;
+            font-size: 13pt;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            margin-bottom: 25px;
+        }
+        th, td {
+            border: 1px solid #CBD5E1;
+            padding: 10px 14px;
+            text-align: left;
+        }
+        th {
+            background-color: #F1F5F9;
+            color: #0F172A;
+            font-weight: bold;
+        }
+        ul, ol {
+            margin-top: 6px;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+        code, .badge {
+            background-color: #EEF2FF;
+            color: #3730A3;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-family: Consolas, monospace;
+            font-weight: bold;
+        }
+        pre {
+            background-color: #F8FAFC;
+            border: 1px solid #E2E8F0;
+            padding: 14px;
+            border-radius: 8px;
+            font-family: Consolas, monospace;
+            font-size: 10pt;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>PANDUAN LANGKAH DEMI LANGKAH MEMBUAT APLIKASI<br><small>XI PPLG B — INFOSPACE (SMK NEGERI 2 SURAKARTA)</small></h1>
+
+    <h2>🛠️ LINGKUP & PRASYARAT PEMBANGUNAN</h2>
+    <table>
+        <tr>
+            <th width="30%">Software IDE</th>
+            <td>Android Studio (Jellyfish / Koala / Ladybug atau versi terbaru)</td>
+        </tr>
+        <tr>
+            <th>Bahasa Pemrograman</th>
+            <td>Java</td>
+        </tr>
+        <tr>
+            <th>Tampilan User Interface</th>
+            <td>XML (Material Design 3)</td>
+        </tr>
+        <tr>
+            <th>Minimum SDK</th>
+            <td>API 24 (Android 7.0 Nougat)</td>
+        </tr>
+        <tr>
+            <th>Package Name</th>
+            <td><span class="badge">com.example.xipplgb_infospace</span></td>
+        </tr>
+    </table>
+
+    <h2>📌 LANGKAH 1: INISIALISASI PROYEK BARU DI ANDROID STUDIO</h2>
+    <ol>
+        <li>Buka Android Studio ➔ Klik <b>New Project</b>.</li>
+        <li>Pilih templat <b>Empty Views Activity</b> ➔ Klik <b>Next</b>.</li>
+        <li>Isi konfigurasi proyek:
+            <ul>
+                <li><b>Name</b>: <span class="badge">XI PPLG B - InfoSpace</span></li>
+                <li><b>Package name</b>: <span class="badge">com.example.xipplgb_infospace</span></li>
+                <li><b>Language</b>: <span class="badge">Java</span></li>
+                <li><b>Minimum SDK</b>: <span class="badge">API 24 (Android 7.0)</span></li>
+            </ul>
+        </li>
+        <li>Klik <b>Finish</b> dan tunggu proses Gradle Sync selesai.</li>
+    </ol>
+
+    <h2>🎨 LANGKAH 2: MENGATUR SKEMA WARNA APLIKASI (`colors.xml`)</h2>
+    <p>Buka file <span class="badge">app/src/main/res/values/colors.xml</span> dan ganti dengan skema warna berikut:</p>
+<pre>
+&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;resources&gt;
+    &lt;color name="bg_main"&gt;#FFFFFF&lt;/color&gt;
+    &lt;color name="white"&gt;#FFFFFF&lt;/color&gt;
+    &lt;color name="primary_indigo"&gt;#4F46E5&lt;/color&gt;
+    &lt;color name="primary_indigo_dark"&gt;#3730A3&lt;/color&gt;
+    &lt;color name="text_primary"&gt;#0F172A&lt;/color&gt;
+    &lt;color name="text_secondary"&gt;#475569&lt;/color&gt;
+    &lt;color name="text_muted"&gt;#64748B&lt;/color&gt;
+    &lt;color name="danger_red"&gt;#EF4444&lt;/color&gt;
+    &lt;color name="border_light"&gt;#CBD5E1&lt;/color&gt;
+&lt;/resources&gt;
+</pre>
+
+    <h2>🧱 LANGKAH 3: MEMBUAT PACKAGE & CLASS MODEL DATA (`model`)</h2>
+    <p>Buat package baru bernama <span class="badge">model</span> di bawah <span class="badge">com.example.xipplgb_infospace</span>, lalu buat 7 class POJO berikut:</p>
+    <ol>
+        <li><b>Student.java</b>: Merekam data profil siswa (<span class="badge">int absentNumber</span>, <span class="badge">String name</span>).</li>
+        <li><b>Teacher.java</b>: Merekam data profil guru (<span class="badge">int officialCode</span>, <span class="badge">String name</span>, <span class="badge">String blockCode</span>).</li>
+        <li><b>ScheduleItem.java</b>: Merekam data jam pelajaran (<span class="badge">subjectName</span>, <span class="badge">periodRange</span>, <span class="badge">timeRange</span>, <span class="badge">teacherName</span>, <span class="badge">teacherCode</span>).</li>
+        <li><b>Task.java</b>: Merekam tugas kelas (<span class="badge">id</span>, <span class="badge">title</span>, <span class="badge">subject</span>, <span class="badge">deadline</span>, <span class="badge">authorName</span>, <span class="badge">authorAbsent</span>, <span class="badge">createdAt</span>).</li>
+        <li><b>InfoItem.java</b>: Merekam pengumuman kelas (<span class="badge">id</span>, <span class="badge">title</span>, <span class="badge">content</span>, <span class="badge">authorName</span>, <span class="badge">authorAbsent</span>, <span class="badge">createdAt</span>).</li>
+        <li><b>BlockInfo.java</b>: Merekam status blok berjalan (<span class="badge">blockType</span>, <span class="badge">weekNumber</span>, <span class="badge">dateRange</span>, <span class="badge">dayName</span>, <span class="badge">fullStatusTitle</span>).</li>
+        <li><b>TimeSlot.java</b>: Merekam jam alokasi bel sekolah (<span class="badge">periodNumber</span>, <span class="badge">startTime</span>, <span class="badge">endTime</span>).</li>
+    </ol>
+
+    <h2>🗄️ LANGKAH 4: MEMBUAT REPOSITORY / DATABASE SELERHANA (`data`)</h2>
+    <p>Buat package baru bernama <span class="badge">data</span> dan buat 5 class repository berikut:</p>
+    <ol>
+        <li><b>StudentData.java</b>: Method <span class="badge">getStudents()</span> yang mengembalikan <span class="badge">ArrayList&lt;Student&gt;</span> berisi 36 nama & absen siswa terdaftar.</li>
+        <li><b>TeacherData.java</b>: Method <span class="badge">getTeachers()</span> berisi 15 guru (R1–R6 dan MPU Kode 5–67), serta pencarian <span class="badge">getTeacherByOfficialCode()</span>.</li>
+        <li><b>TimeTableData.java</b>: Jam bel sekolah <span class="badge">getRegularSlots()</span> (Jam 1–12 Senin–Kamis) dan <span class="badge">getFridaySlots()</span> (khusus Jumat).</li>
+        <li><b>ScheduleKKData.java</b>: Method <span class="badge">getSchedule(weekNumber, dayName)</span> untuk daftar mapel Produktif PPLG siklus Minggu 1 & 2.</li>
+        <li><b>ScheduleMPUData.java</b>: Method <span class="badge">getScheduleForDay(dayName)</span> untuk daftar mapel MPU Senin s/d Jumat.</li>
+    </ol>
+
+    <h2>⚙️ LANGKAH 5: MEMBUAT HELPER LOGIKA & MEMORI (`utils`)</h2>
+    <p>Buat package baru bernama <span class="badge">utils</span> dan buat 2 class helper berikut:</p>
+    <ol>
+        <li><b>BlockHelper.java</b>: Kalkulator otomatis tanggal acuan (<span class="badge">21 Sep 2026</span>) dengan method <span class="badge">getCurrentBlockInfo()</span> membaca <span class="badge">Calendar.getInstance()</span> dari HP pengguna.</li>
+        <li><b>SharedPrefHelper.java</b>: Mengelola <span class="badge">SharedPreferences</span> untuk simpan/baca sesi login, tugas baru, dan pengumuman baru.</li>
+    </ol>
+
+    <h2>🖼️ LANGKAH 6: MENYIAPKAN RESOURCE GAMBAR & SHAPE (`res/drawable`)</h2>
+    <ol>
+        <li><b>Copy-Paste File Gambar Ikon PNG</b> ke folder <span class="badge">app/src/main/res/drawable/</span>:
+            <ul>
+                <li><span class="badge">menu_jadwal.png</span></li>
+                <li><span class="badge">menu_jadwal_blok.png</span></li>
+                <li><span class="badge">menu_tugas.png</span></li>
+                <li><span class="badge">menu_info.png</span></li>
+                <li><span class="badge">menu_anggota.png</span></li>
+                <li><span class="badge">menu_profil.png</span></li>
+                <li><span class="badge">menu_keluar.png</span></li>
+            </ul>
+        </li>
+        <li><b>Buat File XML Shape Layout</b>:
+            <ul>
+                <li><span class="badge">bg_banner_gradient.xml</span> (Gradient Hero Banner Indigo)</li>
+                <li><span class="badge">bg_menu_card_elevated.xml</span> (Kartu menu membulat <span class="badge">16dp</span>)</li>
+                <li><span class="badge">bg_menu_danger_card.xml</span> (Kartu tombol keluar)</li>
+                <li><span class="badge">bg_card.xml</span> & <span class="badge">bg_input.xml</span></li>
+                <li><span class="badge">bg_button_active.xml</span> & <span class="badge">bg_button_inactive.xml</span></li>
+            </ul>
+        </li>
+    </ol>
+
+    <h2>📱 LANGKAH 7: MEMBUAT XML LAYOUT & KODE ACTIVITY</h2>
+    <ol>
+        <li><b>Halaman Login</b>: <span class="badge">activity_login.xml</span> & <span class="badge">LoginActivity.java</span> (Validasi 36 siswa & simpan sesi).</li>
+        <li><b>Halaman Dashboard Home</b>: <span class="badge">activity_home.xml</span> & <span class="badge">HomeActivity.java</span> (Header profil, status blok, dan grid menu 2-kolom).</li>
+        <li><b>Halaman Jadwal Pelajaran</b>: <span class="badge">activity_schedule.xml</span> & <span class="badge">ScheduleActivity.java</span> (Filter tipe blok KK W1/W2/MPU, tab hari, dan tanggalan khusus minggu berjalan).</li>
+        <li><b>Halaman Kalender Blok</b>: <span class="badge">activity_calendar.xml</span> & <span class="badge">CalendarActivity.java</span>.</li>
+        <li><b>Halaman Tugas Kelas</b>: <span class="badge">activity_task.xml</span>, <span class="badge">activity_add_task.xml</span>, <span class="badge">TaskActivity.java</span>, <span class="badge">AddTaskActivity.java</span>.</li>
+        <li><b>Halaman Info Kelas</b>: <span class="badge">activity_info.xml</span>, <span class="badge">activity_add_info.xml</span>, <span class="badge">InfoActivity.java</span>, <span class="badge">AddInfoActivity.java</span>.</li>
+        <li><b>Halaman Anggota Kelas</b>: <span class="badge">activity_members.xml</span> & <span class="badge">MembersActivity.java</span>.</li>
+        <li><b>Halaman Profil Saya</b>: <span class="badge">activity_profile.xml</span> & <span class="badge">ProfileActivity.java</span>.</li>
+    </ol>
+
+    <h2>🚀 LANGKAH 8: KONFIGURASI ANDROIDMANIFEST & PENGUJIAN</h2>
+    <ol>
+        <li>Buka <span class="badge">app/src/main/AndroidManifest.xml</span>.</li>
+        <li>Daftarkan seluruh Activity yang telah dibuat dan atur <span class="badge">LoginActivity</span> sebagai <span class="badge">LAUNCHER</span> utama.</li>
+        <li>Lakukan Rebuild Project: Klik menu <b>Build ➔ Rebuild Project</b>.</li>
+        <li>Jalankan aplikasi di Emulator atau HP Android fisik.</li>
+    </ol>
+
+</body>
+</html>

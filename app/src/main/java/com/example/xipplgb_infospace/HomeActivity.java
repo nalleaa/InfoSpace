@@ -25,7 +25,6 @@ public class HomeActivity extends AppCompatActivity {
     private View btnMenuCalendar;
     private View btnMenuTask;
     private View btnMenuInfo;
-    private View btnMenuChecklist;
     private View btnMenuMembers;
     private View btnMenuProfile;
     private View btnLogoutHome;
@@ -50,7 +49,6 @@ public class HomeActivity extends AppCompatActivity {
         btnMenuCalendar = findViewById(R.id.btnMenuCalendar);
         btnMenuTask = findViewById(R.id.btnMenuTask);
         btnMenuInfo = findViewById(R.id.btnMenuInfo);
-        btnMenuChecklist = findViewById(R.id.btnMenuChecklist);
         btnMenuMembers = findViewById(R.id.btnMenuMembers);
         btnMenuProfile = findViewById(R.id.btnMenuProfile);
         btnLogoutHome = findViewById(R.id.btnLogoutHome);
@@ -81,7 +79,7 @@ public class HomeActivity extends AppCompatActivity {
             });
         }
 
-        // 5. Tombol Menu Kartu Jadwal
+        // 5. Tombol Menu Kartu Jadwal Pelajaran
         if (btnMenuSchedule != null) {
             btnMenuSchedule.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -121,17 +119,7 @@ public class HomeActivity extends AppCompatActivity {
             });
         }
 
-        // 9. Tombol Menu Kartu Checklist
-        if (btnMenuChecklist != null) {
-            btnMenuChecklist.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    startActivity(new Intent(HomeActivity.this, ChecklistActivity.class));
-                }
-            });
-        }
-
-        // 10. Tombol Menu Kartu Anggota
+        // 9. Tombol Menu Kartu Anggota
         if (btnMenuMembers != null) {
             btnMenuMembers.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -141,7 +129,7 @@ public class HomeActivity extends AppCompatActivity {
             });
         }
 
-        // 11. Tombol Menu Kartu Profil
+        // 10. Tombol Menu Kartu Profil
         if (btnMenuProfile != null) {
             btnMenuProfile.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -151,7 +139,7 @@ public class HomeActivity extends AppCompatActivity {
             });
         }
 
-        // 12. Tombol Kartu Keluar (Logout)
+        // 11. Tombol Kartu Keluar (Logout)
         if (btnLogoutHome != null) {
             btnLogoutHome.setOnClickListener(new View.OnClickListener() {
                 @Override

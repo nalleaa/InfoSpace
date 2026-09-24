@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>DOKUMENTASI LENGKAP APLIKASI XI PPLG B — INFOSPACE</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            line-height: 1.6;
+            color: #0F172A;
+            margin: 40px;
+            background-color: #FFFFFF;
+        }
+        h1 {
+            color: #1E40AF;
+            border-bottom: 3px solid #2563EB;
+            padding-bottom: 10px;
+            font-size: 24pt;
+        }
+        h2 {
+            color: #1E293B;
+            background-color: #EFF6FF;
+            padding: 8px 14px;
+            border-left: 5px solid #2563EB;
+            margin-top: 30px;
+            font-size: 16pt;
+        }
+        h3 {
+            color: #0369A1;
+            margin-top: 20px;
+            font-size: 13pt;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            margin-bottom: 25px;
+        }
+        th, td {
+            border: 1px solid #CBD5E1;
+            padding: 10px 14px;
+            text-align: left;
+        }
+        th {
+            background-color: #F1F5F9;
+            color: #0F172A;
+            font-weight: bold;
+        }
+        ul {
+            margin-top: 5px;
+        }
+        li {
+            margin-bottom: 6px;
+        }
+        .badge {
+            background-color: #EEF2FF;
+            color: #3730A3;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>DOKUMENTASI LENGKAP APLIKASI<br><small>XI PPLG B — INFOSPACE (SMK NEGERI 2 SURAKARTA)</small></h1>
+
+    <h2>1. PROFIL & ARSITEKTUR APLIKASI</h2>
+    <table>
+        <tr>
+            <th width="30%">Nama Aplikasi</th>
+            <td><b>XI PPLG B — InfoSpace</b></td>
+        </tr>
+        <tr>
+            <th>Platform</th>
+            <td>Android Native (Java & XML)</td>
+        </tr>
+        <tr>
+            <th>Package Name</th>
+            <td><span class="badge">com.example.xipplgb_infospace</span></td>
+        </tr>
+        <tr>
+            <th>Target Pengguna</th>
+            <td>Siswa & Guru XI PPLG B, SMK Negeri 2 Surakarta</td>
+        </tr>
+        <tr>
+            <th>Tahun Ajaran</th>
+            <td>Semester Ganjil 2026/2027</td>
+        </tr>
+        <tr>
+            <th>Fungsi Utama</th>
+            <td>Manajemen Jadwal Sistem Blok (KK & MPU), Direktori Tugas Kelas, Papan Pengumuman, Direktori Anggota Kelas, dan Manajemen Sesi Login.</td>
+        </tr>
+    </table>
+
+    <h2>2. PENJELASAN DETAIL SELURUH BERKAS KODE (PACKAGE)</h2>
+
+    <h3>A. Package <span class="badge">model</span> (POJO / Struktur Data Objek)</h3>
+    <ul>
+        <li><b>Student.java</b>: Merekam data individual siswa (<span class="badge">absentNumber</span> dan <span class="badge">name</span>).</li>
+        <li><b>Teacher.java</b>: Merekam data guru pengampu (<span class="badge">officialCode</span>, <span class="badge">name</span>, dan <span class="badge">blockCode</span>).</li>
+        <li><b>ScheduleItem.java</b>: Merekam data item mata pelajaran (<span class="badge">subjectName</span>, <span class="badge">periodRange</span>, <span class="badge">timeRange</span>, <span class="badge">teacherName</span>, <span class="badge">teacherCode</span>).</li>
+        <li><b>Task.java</b>: Merekam data tugas kelas yang dibuat siswa (<span class="badge">id</span>, <span class="badge">title</span>, <span class="badge">subject</span>, <span class="badge">deadline</span>, <span class="badge">authorName</span>, <span class="badge">authorAbsent</span>, <span class="badge">createdAt</span>).</li>
+        <li><b>InfoItem.java</b>: Merekam data pengumuman kelas (<span class="badge">id</span>, <span class="badge">title</span>, <span class="badge">content</span>, <span class="badge">authorName</span>, <span class="badge">authorAbsent</span>, <span class="badge">createdAt</span>).</li>
+        <li><b>BlockInfo.java</b>: Merekam status blok berjalan (<span class="badge">blockType</span>, <span class="badge">weekNumber</span>, <span class="badge">dateRange</span>, <span class="badge">dayName</span>, <span class="badge">fullStatusTitle</span>).</li>
+        <li><b>TimeSlot.java</b>: Merekam jam alokasi bel sekolah (<span class="badge">periodNumber</span>, <span class="badge">startTime</span>, <span class="badge">endTime</span>).</li>
+    </ul>
+
+    <h3>B. Package <span class="badge">data</span> (Repository & Database Lokal)</h3>
+    <ul>
+        <li><b>StudentData.java</b>: Menyimpan daftar lengkap <b>36 Siswa Terdaftar XI PPLG B</b> untuk otentikasi login.</li>
+        <li><b>TeacherData.java</b>: Menyimpan daftar <b>15 Guru Pengampu</b> (Guru Produktif PPLG Kode 134–139 dan Guru MPU Kode 5–67).</li>
+        <li><b>TimeTableData.java</b>: Kalkulator bel jam pelajaran sekolah (Jam 1–12) dengan penyesuaian reguler (Senin–Kamis) dan khusus Jumat.</li>
+        <li><b>ScheduleKKData.java</b>: Database jadwal mata pelajaran Konsentrasi Keahlian / Produktif PPLG (Web, Mobile, Database, KIK, KKA, PTGM) siklus Minggu 1 & Minggu 2.</li>
+        <li><b>ScheduleMPUData.java</b>: Database jadwal mata pelajaran umum / MPU (PABP, PP, BINDO, MAT, BING, PJOK, SEJ, BJW, BK) Senin s/d Jumat.</li>
+    </ul>
+
+    <h3>C. Package <span class="badge">utils</span> (Helper & Logika Sistem)</h3>
+    <ul>
+        <li><b>BlockHelper.java</b>: Kalkulator otomatis sistem blok yang membaca tanggal HP pengguna (<span class="badge">Calendar.getInstance()</span>) dan menghitung secara presisi apakah hari ini termasuk Blok KK (Minggu 1/2) atau MPU serta rentang tanggal mingguan.</li>
+        <li><b>SharedPrefHelper.java</b>: Pengelola memori lokal HP (<i>SharedPreferences</i>) untuk menyimpan sesi login siswa, data tugas baru, dan pengumuman baru secara permanen.</li>
+    </ul>
+
+    <h3>D. Halaman Layar Utama (<span class="badge">Activity</span>)</h3>
+    <ul>
+        <li><b>LoginActivity.java</b>: Halaman masuk siswa dengan validasi data 36 siswa terdaftar.</li>
+        <li><b>HomeActivity.java</b>: Dashboard utama dengan salam profil, status blok aktif, dan 7 menu navigasi.</li>
+        <li><b>ScheduleActivity.java</b>: Halaman jadwal pelajaran interaktif dengan filter hari (Senin–Jumat) dan filter tipe blok (KK W1, KK W2, MPU). Tanggalan hanya muncul pada minggu yang sedang berjalan aktif.</li>
+        <li><b>CalendarActivity.java</b>: Halaman direktori kalender siklus minggu blok pembelajaran.</li>
+        <li><b>TaskActivity.java</b> & <b>AddTaskActivity.java</b>: Halaman direktori tugas kelas dan formulir pembuatan tugas baru tanpa tingkat kesulitan.</li>
+        <li><b>InfoActivity.java</b> & <b>AddInfoActivity.java</b>: Halaman papan pengumuman dan formulir penerbitan pengumuman baru.</li>
+        <li><b>MembersActivity.java</b>: Direktori 36 anggota siswa dengan sorotan akun aktif.</li>
+        <li><b>ProfileActivity.java</b>: Halaman profil siswa, informasi sekolah, dan tombol keluar.</li>
+    </ul>
+
+    <h2>3. DOKUMENTASI RESOURCE (`res/drawable`)</h2>
+    <ul>
+        <li><b>File Ikon PNG Menu Utama</b>: <span class="badge">menu_jadwal.png</span>, <span class="badge">menu_jadwal_blok.png</span>, <span class="badge">menu_tugas.png</span>, <span class="badge">menu_info.png</span>, <span class="badge">menu_ceklis.png</span>, <span class="badge">menu_anggota.png</span>, <span class="badge">menu_profil.png</span>, <span class="badge">menu_keluar.png</span>.</li>
+        <li><b>File Shape XML Komponen UI</b>:
+            <ul>
+                <li><span class="badge">bg_banner_gradient.xml</span>: Gradient Hero Banner (Indigo-Violet).</li>
+                <li><span class="badge">bg_menu_card_elevated.xml</span>: Kartu grid menu ber-elevasi halus (<span class="badge">16dp</span>).</li>
+                <li><span class="badge">bg_menu_danger_card.xml</span>: Kartu tombol keluar merah lembut.</li>
+                <li><span class="badge">bg_card.xml</span> & <span class="badge">bg_input.xml</span>: Kartu putih dan kotak input form.</li>
+                <li><span class="badge">bg_button_active.xml</span> & <span class="badge">bg_button_inactive.xml</span>: Gaya tombol filter aktif/non-aktif.</li>
+            </ul>
+        </li>
+    </ul>
+
+</body>
+</html>
