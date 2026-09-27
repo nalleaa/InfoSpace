@@ -66,10 +66,12 @@ public class ScheduleActivity extends AppCompatActivity {
         btnDayMinggu = findViewById(R.id.btnDayMinggu);
         dayButtons = new Button[]{btnDaySenin, btnDaySelasa, btnDayRabu, btnDayKamis, btnDayJumat, btnDaySabtu, btnDayMinggu};
 
-        // 2. Ambil Informasi Blok Berjalan Saat Ini
+        // 2. Ambil Informasi Blok Berjalan Saat Ini & Mode Pilihan dari Intent
         currentBlock = BlockHelper.getCurrentBlockInfo();
 
-        if (currentBlock.getBlockType().equalsIgnoreCase("KK")) {
+        if (getIntent().hasExtra("TARGET_MODE")) {
+            selectedMode = getIntent().getStringExtra("TARGET_MODE");
+        } else if (currentBlock.getBlockType().equalsIgnoreCase("KK")) {
             int week = currentBlock.getWeekNumber();
             if (week > 2) week = ((week - 1) % 2) + 1; // Map week 3->1, week 4->2
             selectedMode = "KK" + week;

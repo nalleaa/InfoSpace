@@ -2,6 +2,7 @@ package com.example.xipplgb_infospace;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -25,7 +26,6 @@ public class CalendarActivity extends AppCompatActivity {
         btnBackCalendar = findViewById(R.id.btnBackCalendar);
         containerCalendarWeeks = findViewById(R.id.containerCalendarWeeks);
 
-        // Gunakan onBackPressed() agar pasti menutup halaman
         if (btnBackCalendar != null) {
             btnBackCalendar.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -55,11 +55,23 @@ public class CalendarActivity extends AppCompatActivity {
             BlockInfo info = BlockHelper.getBlockInfoForDate(targetCal);
             boolean isCurrentWeek = info.getDateRange().equals(currentInfo.getDateRange());
 
+            // Tentukan target mode untuk ScheduleActivity (KK1, KK2, atau MPU)
+            final String targetMode;
+            if (info.getBlockType().equalsIgnoreCase("KK")) {
+                int w = info.getWeekNumber();
+                if (w > 2) w = ((w - 1) % 2) + 1;
+                targetMode = "KK" + w;
+            } else {
+                targetMode = "MPU";
+            }
+
             LinearLayout card = new LinearLayout(this);
             card.setOrientation(LinearLayout.VERTICAL);
             card.setBackgroundResource(R.drawable.bg_card);
-            card.setElevation(2f);
+            card.setElevation(isCurrentWeek ? 4f : 2f);
             card.setPadding(32, 24, 32, 24);
+            card.setClickable(true);
+            card.setFocusable(true);
 
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
@@ -104,6 +116,16 @@ public class CalendarActivity extends AppCompatActivity {
 
             card.addView(headerRow);
             card.addView(tvDateRange);
+
+            // KLIK KARTU MINGGU -> Buka Jadwal Pelajaran Pekan Tersebut
+            card.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(CalendarActivity.this, ScheduleActivity.class);
+                    intent.putExtra("TARGET_MODE", targetMode);
+                    startActivity(intent);
+                }
+            });
 
             containerCalendarWeeks.addView(card);
         }
